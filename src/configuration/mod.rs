@@ -3,7 +3,6 @@ pub mod section;
 pub mod group;
 pub mod item;
 mod read_config;
-mod read_commands;
 
 pub use {
     configuration::Configuration,
