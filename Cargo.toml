@@ -1,0 +1,9 @@
+[package]
+name = "quick-commands"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+gtk = "0.15"
+libappindicator = "0.7"
+yaml-rust = "0.4"
