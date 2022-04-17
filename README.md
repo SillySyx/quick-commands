@@ -12,16 +12,23 @@ Example: `~/.local/share/quick-commands`
 # Configuration
 Create file `~/.config/quick-commands/config.yaml` containing the following
 ```
-commands:
-  - name: Texty
-    command: gnome-text-editor
+text: optional text in system tray
+icon: custom gtk icon, default is open-menu-symbolic
 
-  - name: Webby
-    command: flatpak run org.mozilla.firefox
+sections:
+  - groups:
+    - name: grouped commands
+      items:
+      - name: test program
+        command: gnome-text-editor
 
-  - name: Scripty
-    command: bash
-    args: /home/user/script.sh
+      - name: test command
+        command: flatpak run org.mozilla.firefox
+
+  - items:
+    - name: test script
+      command: bash
+      args: /home/user/script.sh
 ```
 
 # Autostart
@@ -31,5 +38,5 @@ If you don't have a easy way to add binaries to autostart you can add the follow
 Type=Application
 Name=Quick-commands
 Description=Starts quick-commands app
-Exec=/home/user/.local/share/quick-commands/quick-commands
+Exec=/home/user/.local/share/quick-commands
 ```
