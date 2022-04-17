@@ -18,7 +18,7 @@ fn main() -> Result<(), &'static str> {
 
     let mut menu = generate_menu_from_configuration_commands(&config);
 
-    let mut indicator = AppIndicator::new("quick-commands appindicator", "");
+    let mut indicator = AppIndicator::new("quick-commands appindicator", "open-menu-symbolic");
     indicator.set_status(AppIndicatorStatus::Active);
     
     indicator.set_menu(&mut menu);

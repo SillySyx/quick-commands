@@ -8,5 +8,5 @@ pub fn execute_command(command: &str, args: &str) {
         cmd.args(args);
     }
 
-    let _ = cmd.spawn();
+    let _ = cmd.output();
 }
