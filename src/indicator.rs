@@ -1,6 +1,6 @@
 use libappindicator::{AppIndicator, AppIndicatorStatus};
 
-use crate::configuration::Configuration;
+use crate::Configuration;
 
 pub fn create_indicator(configuration: &Configuration) -> AppIndicator {
     let mut indicator = AppIndicator::new("quick-commands", "open-menu-symbolic");
