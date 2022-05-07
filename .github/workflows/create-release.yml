@@ -25,7 +25,7 @@ jobs:
         run: cargo build --release
       
       - name: Artifact
-        run: zip -j quick-commands-${{ github.ref_name }} target/release/quick-commands
+        run: zip -j quick-commands-${{ github.ref_name }}.zip target/release/quick-commands
 
       - name: Create Release
         id: create_release
