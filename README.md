@@ -1,8 +1,8 @@
 # Requirements
 The following things needs to be installed in your linux machine for this application to work.
 
-* Gtk
-* libappindicator
+* Gtk3
+* libappindicator3
 * gnome-shell-extension-appindicator (https://github.com/ubuntu/gnome-shell-extension-appindicator)
 
 # Installation
