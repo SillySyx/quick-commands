@@ -26,7 +26,7 @@ fn read_config_file() -> Result<String, AppError> {
     config_path.push("config.yaml");
     
     if !config_path.exists() {
-        let content = "commands:\n  - name: test\n    command: gedit\n    args:";
+        let content = default_config_file()?;
         
         match std::fs::write(&config_path, content) {
             Ok(_) => (),
@@ -56,4 +56,45 @@ fn home_path() -> Result<PathBuf, AppError> {
     let home_path = PathBuf::from(home_var);
 
     Ok(home_path)
+}
+
+fn user_name() -> Result<String, AppError> {
+    let user_var = match var_os("USERNAME") {
+        Some(value) => value,
+        None => return Err(AppError::new("Failed to read USERNAME variable")),
+    };
+
+    match user_var.into_string() {
+        Ok(value) => Ok(value),
+        Err(_) => Err(AppError::new("Failed to read USERNAME variable")),
+    }
+}
+
+fn default_config_file() -> Result<String, AppError> {
+    let user_name = user_name()?;
+
+    let content = format!(r#"
+sections:
+  - items:
+    - name: Open settings
+      command: gedit
+      args: /home/{}/.config/quick-commands/config.yaml"#, user_name);
+
+    Ok(content)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::user_name;
+
+    #[test]
+    fn should_be_able_to_read_user_name() {
+        if let Ok(user) = user_name() {
+            assert_ne!("", user);
+            return;
+        }
+
+        panic!("oh no!");
+    }
+
 }
