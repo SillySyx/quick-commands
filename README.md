@@ -14,6 +14,7 @@ Create file `~/.config/quick-commands/config.yaml` containing the following
 ```
 text: optional text in system tray
 icon: custom gtk icon, default is open-menu-symbolic
+bell reminder: 300
 
 sections:
   - groups:
@@ -29,6 +30,15 @@ sections:
     - name: test script
       command: bash
       args: /home/user/script.sh
+
+notifications:
+  - title: Break!
+    text: Time to stretch
+    time: 09:00
+
+  - title: Lunch!
+    text: Take your time
+    time: 12:00
 ```
 
 # Autostart

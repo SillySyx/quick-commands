@@ -57,11 +57,12 @@ fn generate_items(items: &[Item]) -> Vec<MenuItem> {
     for item in items {
         let menu_item = MenuItem::with_label(&item.name);
 
-        let command = item.command.clone();
-        let args = item.args.clone();
-
-        menu_item.connect_activate(move |_| {
-            execute_command(&command, &args);
+        menu_item.connect_activate({
+            let command = item.command.clone();
+            let args = item.command.clone();
+            move |_| {
+                execute_command(&command, &args);
+            }
         });
 
         menu_items.push(menu_item);

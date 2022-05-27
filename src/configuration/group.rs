@@ -10,22 +10,24 @@ pub struct Group {
 pub fn read_groups_from_yaml(yaml: &Yaml) -> Vec<Group> {
     let mut groups = Vec::new();
 
-    if yaml.is_badvalue() {
+    if yaml["groups"].is_badvalue() {
         return groups;
     }
 
-    for yaml in yaml.as_vec().unwrap() {
-        let mut name = String::from("");
-        if let yaml_rust::Yaml::String(ref value) = &yaml["name"] {
-            name = value.to_owned();
+    if let Some(yaml) = yaml["groups"].as_vec() {
+        for yaml in yaml {
+            let mut name = String::from("");
+            if let yaml_rust::Yaml::String(ref value) = &yaml["name"] {
+                name = value.to_owned();
+            }
+    
+            let items = read_items_from_yaml(&yaml["items"]);
+    
+            groups.push(Group { 
+                name, 
+                items,
+            });
         }
-
-        let items = read_items_from_yaml(&yaml["items"]);
-
-        groups.push(Group { 
-            name, 
-            items,
-        })
     }
 
     groups

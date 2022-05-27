@@ -11,14 +11,20 @@ pub struct Section {
 pub fn read_sections_from_yaml(yaml: &Yaml) -> Vec<Section> {
     let mut sections = Vec::new();
 
-    for section in yaml["sections"].as_vec().unwrap() {
-        let groups = read_groups_from_yaml(&section["groups"]);
-        let items = read_items_from_yaml(&section["items"]);
+    if yaml["sections"].is_badvalue() {
+        return sections;
+    }
 
-        sections.push(Section{
-            groups,
-            items,
-        });
+    if let Some(yaml) = yaml["sections"].as_vec() {
+        for section in yaml {
+            let groups = read_groups_from_yaml(&section);
+            let items = read_items_from_yaml(&section);
+    
+            sections.push(Section{
+                groups,
+                items,
+            });
+        }
     }
 
     sections

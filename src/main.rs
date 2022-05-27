@@ -1,3 +1,6 @@
+mod clone;
+mod notifications;
+mod bell_reminder;
 mod indicator;
 mod menu;
 mod configuration;
@@ -17,6 +20,9 @@ fn main() -> Result<(), &'static str> {
         Ok(config) => config,
         Err(error) => return Err(error.message),
     };
+
+    notifications::setup_notifications(&config);
+    bell_reminder::setup_bell_reminder(&config);
 
     let mut indicator = create_indicator(&config);
 
