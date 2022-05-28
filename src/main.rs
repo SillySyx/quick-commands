@@ -1,4 +1,3 @@
-mod clone;
 mod notifications;
 mod bell_reminder;
 mod indicator;
