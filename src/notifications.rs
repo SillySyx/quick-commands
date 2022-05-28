@@ -30,7 +30,6 @@ pub fn setup_notifications(configuration: &Configuration) {
             last_time = Local::now();
             
             if let Some(duration) = find_duration_to_sleep_until_next_notification(&notifications, &last_time) {
-                println!("sleepy time! {:?}", duration);
                 sleep(duration);
                 continue;
             }

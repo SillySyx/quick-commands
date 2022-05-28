@@ -10,10 +10,6 @@ pub struct Group {
 pub fn read_groups_from_yaml(yaml: &Yaml) -> Vec<Group> {
     let mut groups = Vec::new();
 
-    if yaml["groups"].is_badvalue() {
-        return groups;
-    }
-
     if let Some(yaml) = yaml["groups"].as_vec() {
         for yaml in yaml {
             let mut name = String::from("");

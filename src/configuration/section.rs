@@ -11,10 +11,6 @@ pub struct Section {
 pub fn read_sections_from_yaml(yaml: &Yaml) -> Vec<Section> {
     let mut sections = Vec::new();
 
-    if yaml["sections"].is_badvalue() {
-        return sections;
-    }
-
     if let Some(yaml) = yaml["sections"].as_vec() {
         for section in yaml {
             let groups = read_groups_from_yaml(&section);

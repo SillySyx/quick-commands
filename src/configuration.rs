@@ -1,4 +1,5 @@
 mod configuration;
+pub mod bell;
 pub mod section;
 pub mod group;
 pub mod item;

@@ -14,7 +14,10 @@ Create file `~/.config/quick-commands/config.yaml` containing the following
 ```
 text: optional text in system tray
 icon: custom gtk icon, default is open-menu-symbolic
-bell reminder: 300
+
+bell:
+  interval: 300
+  volume: 1.0
 
 sections:
   - groups:

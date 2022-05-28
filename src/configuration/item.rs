@@ -9,10 +9,6 @@ pub struct Item {
 pub fn read_items_from_yaml(yaml: &Yaml) -> Vec<Item> {
     let mut items = Vec::new();
 
-    if yaml["items"].is_badvalue() {
-        return items;
-    }
-
     if let Some(yaml) = yaml["items"].as_vec() {
         for yaml in yaml {
             let name = match &yaml["name"] {

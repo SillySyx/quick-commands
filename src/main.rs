@@ -1,5 +1,5 @@
 mod notifications;
-mod bell_reminder;
+mod bell;
 mod indicator;
 mod menu;
 mod configuration;
@@ -21,7 +21,7 @@ fn main() -> Result<(), &'static str> {
     };
 
     notifications::setup_notifications(&config);
-    bell_reminder::setup_bell_reminder(&config);
+    bell::setup_bell(&config);
 
     let mut indicator = create_indicator(&config);
 
