@@ -76,8 +76,8 @@ fn default_config_file() -> Result<String, AppError> {
     let content = format!(r#"
 sections:
   - items:
-    - name: Open settings
-      command: gedit
+    - name: Settings
+      command: gnome-text-editor
       args: /home/{}/.config/quick-commands/config.yaml"#, user_name);
 
     Ok(content)
@@ -96,5 +96,4 @@ mod tests {
 
         panic!("oh no!");
     }
-
 }

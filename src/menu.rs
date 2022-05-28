@@ -59,7 +59,7 @@ fn generate_items(items: &[Item]) -> Vec<MenuItem> {
 
         menu_item.connect_activate({
             let command = item.command.clone();
-            let args = item.command.clone();
+            let args = item.args.clone();
             move |_| {
                 execute_command(&command, &args);
             }

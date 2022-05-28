@@ -1,15 +1,9 @@
-mod notification;
-
-pub use {
-    notification::*,
-};
-
 use chrono::{Local, DateTime};
 use std::thread::{spawn, sleep};
 use std::time::Duration;
 use std::process::Command;
 
-use super::Configuration;
+use super::{Configuration, configuration::Notification};
 
 pub fn setup_notifications(configuration: &Configuration) {
     if configuration.notifications.len() == 0 {

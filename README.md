@@ -12,8 +12,9 @@ Example: `~/.local/share/quick-commands`
 # Configuration
 Create file `~/.config/quick-commands/config.yaml` containing the following
 ```
-text: optional text in system tray
-icon: custom gtk icon, default is open-menu-symbolic
+tray:
+  text: optional text in system tray
+  icon: open-menu-symbolic
 
 bell:
   interval: 300

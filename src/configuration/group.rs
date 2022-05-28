@@ -12,12 +12,12 @@ pub fn read_groups_from_yaml(yaml: &Yaml) -> Vec<Group> {
 
     if let Some(yaml) = yaml["groups"].as_vec() {
         for yaml in yaml {
-            let mut name = String::from("");
-            if let yaml_rust::Yaml::String(ref value) = &yaml["name"] {
-                name = value.to_owned();
-            }
-    
-            let items = read_items_from_yaml(&yaml["items"]);
+            let name = match yaml["name"].as_str() {
+                Some(value) => value.to_owned(),
+                None => continue,
+            };
+
+            let items = read_items_from_yaml(&yaml);
     
             groups.push(Group { 
                 name, 
