@@ -1,9 +1,9 @@
 use std::fs::{read, create_dir_all};
 use std::path::PathBuf;
-use std::env::var_os;
 use yaml_rust::{YamlLoader, Yaml};
 
 use crate::errors::AppError;
+use crate::home_folder::read_home_from_environment_variables;
 
 pub fn read_yaml_file() -> Result<Vec<Yaml>, AppError> {
     let content = read_config_file()?;
@@ -26,7 +26,7 @@ fn read_config_file() -> Result<String, AppError> {
     config_path.push("config.yaml");
     
     if !config_path.exists() {
-        let content = default_config_file()?;
+        let content = default_config_file();
         
         match std::fs::write(&config_path, content) {
             Ok(_) => (),
@@ -48,52 +48,28 @@ fn read_config_file() -> Result<String, AppError> {
 }
 
 fn home_path() -> Result<PathBuf, AppError> {
-    let home_var = match var_os("HOME") {
+    let home = match read_home_from_environment_variables() {
         Some(value) => value,
         None => return Err(AppError::new("Failed to read HOME variable")),
     };
 
-    let home_path = PathBuf::from(home_var);
+    let home_path = PathBuf::from(home);
 
     Ok(home_path)
 }
 
-fn user_name() -> Result<String, AppError> {
-    let user_var = match var_os("USERNAME") {
-        Some(value) => value,
-        None => return Err(AppError::new("Failed to read USERNAME variable")),
-    };
-
-    match user_var.into_string() {
-        Ok(value) => Ok(value),
-        Err(_) => Err(AppError::new("Failed to read USERNAME variable")),
-    }
-}
-
-fn default_config_file() -> Result<String, AppError> {
-    let user_name = user_name()?;
-
-    let content = format!(r#"
+fn default_config_file() -> &'static str {
+    r#"
 sections:
   - items:
     - name: Settings
       command: gnome-text-editor
-      args: /home/{}/.config/quick-commands/config.yaml"#, user_name);
-
-    Ok(content)
+      args: ~/.config/quick-commands/config.yaml"#
 }
 
 #[cfg(test)]
 mod tests {
-    use super::user_name;
-
     #[test]
-    fn should_be_able_to_read_user_name() {
-        if let Ok(user) = user_name() {
-            assert_ne!("", user);
-            return;
-        }
-
-        panic!("oh no!");
+    fn should_be_able_to_() {
     }
 }

@@ -1,8 +1,10 @@
 use yaml_rust::Yaml;
+use crate::home_folder::resolve_home_folder;
 
 pub struct Bell {
     pub interval: u64,
     pub volume: f64,
+    pub audio_file: String,
 }
 
 pub fn read_bell_from_yaml(yaml: &Yaml) -> Option<Bell> {
@@ -16,8 +18,14 @@ pub fn read_bell_from_yaml(yaml: &Yaml) -> Option<Bell> {
         None => 1.0,
     };
 
+    let audio_file = match yaml["bell"]["file"].as_str() {
+        Some(value) => resolve_home_folder(value.to_owned()),
+        None => String::from("/usr/share/sounds/freedesktop/stereo/complete.oga"),
+    };
+
     Some(Bell {
         interval,
         volume,
+        audio_file,
     })
 }

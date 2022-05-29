@@ -1,3 +1,4 @@
+mod home_folder;
 mod notifications;
 mod bell;
 mod indicator;
