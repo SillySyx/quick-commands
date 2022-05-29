@@ -19,21 +19,27 @@ tray:
 bell:
   interval: 300
   volume: 1.0
+  file: /usr/share/sounds/freedesktop/stereo/complete.oga
 
 sections:
   - groups:
     - name: grouped commands
       items:
-      - name: test program
+      - name: my text file
         command: gnome-text-editor
+        args: ~/my-file
 
-      - name: test command
-        command: flatpak run org.mozilla.firefox
+      - name: firefox
+        command: flatpak
+        args: run org.mozilla.firefox
+
+      - name: my custom app
+        command: ~/do-something
 
   - items:
     - name: test script
       command: bash
-      args: /home/user/script.sh
+      args: ~/script.sh
 
 notifications:
   - title: Break!
