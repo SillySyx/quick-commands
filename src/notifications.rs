@@ -1,4 +1,4 @@
-use chrono::{Local, DateTime};
+use chrono::{Local, DateTime, Datelike};
 use std::thread::{spawn, sleep};
 use std::time::Duration;
 use std::process::Command;
@@ -36,14 +36,16 @@ pub fn setup_notifications(configuration: &Configuration) {
 
 fn find_notifications_to_show(notifications: &Vec<Notification>, last_time: &DateTime<Local>) -> Option<Vec<Notification>> {
     let now = Local::now();
+    let day = now.date().weekday();
 
     let notifications: Vec<Notification> = notifications
         .iter()
         .filter({
             let last_time = last_time.time();
             let now = now.time();
+            let day = day.clone();
             move |notification| {
-                notification.time > last_time && notification.time < now
+                notification.is_weekday(&day) && notification.time > last_time && notification.time < now
             }
         })
         .map(|notification| notification.clone())
