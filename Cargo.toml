@@ -6,6 +6,6 @@ edition = "2021"
 [dependencies]
 gtk = "0.15"
 libappindicator = "0.7"
-libappindicator-sys = "=0.7.1"
+libappindicator-sys = "=0.7.0"
 yaml-rust = "0.4"
 chrono = "0.4"
